@@ -1,22 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>websocket-message-handlers</groupId>
-	<artifactId>websocket.messagehandler.web</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>websocket.messagehandler.web example Webapp</name>
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-websocket-api</artifactId>
-			<version>8.0-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<finalName>websocket-messages</finalName>
-        <plugins>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>websocket-message-handlers</groupId>
+    <artifactId>parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Websocket message handlers example project</name>
+
+    <modules>
+        <module>websocket.messagehandler.web</module>
+      <!--  <module>websocket.messagehandler.client</module> -->
+    <module>websocket.messagehandler.client</module>
+  </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -26,14 +27,26 @@
                 <target>1.7</target>
             </configuration>
             </plugin>
-        </plugins>
-    
-	</build>
+        
+            </plugins>
+        </pluginManagement>
+    </build>
+
+	<dependencyManagement>
+    <dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket-api</artifactId>
+			<version>8.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	</dependencyManagement>
+	
 	<repositories>
 		<repository>
 			<id>Apache maven repository</id>
 			<url>https://repository.apache.org/content/repositories/public/</url>
 		</repository>
 	</repositories>
-
 </project>

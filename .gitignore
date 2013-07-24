@@ -6,10 +6,11 @@
 *.ear
 
 #IDE files
-.settings
 .project
+.classpath
 *.iml
 
 #build folder
 /target
+/.settings
 
