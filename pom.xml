@@ -10,8 +10,7 @@
 
     <modules>
         <module>websocket.messagehandler.web</module>
-      <!--  <module>websocket.messagehandler.client</module> -->
-    <module>websocket.messagehandler.client</module>
+        <module>websocket.messagehandler.client</module> 
   </modules>
 
     <build>
