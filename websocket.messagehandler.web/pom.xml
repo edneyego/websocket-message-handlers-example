@@ -3,15 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-        <groupId>websocket-message-handlers</groupId>
+        <groupId>websocket-examples</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
 
+	<groupId>websocket-message-handlers</groupId>
 	<artifactId>websocket.messagehandler.web</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>websocket-web</name>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>websocket.messagehandler.web</name>
 	
 	<build>
 		<finalName>websocket-messages</finalName>

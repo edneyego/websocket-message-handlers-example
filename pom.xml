@@ -2,15 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>websocket-message-handlers</groupId>
+    <groupId>websocket-examples</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Websocket message handlers example project</name>
+    <version>0.0.2-SNAPSHOT</version>
+    <name>Websocket examples project</name>
 
     <modules>
         <module>websocket.messagehandler.web</module>
-        <module>websocket.messagehandler.client</module> 
+        <module>websocket.messagehandler.client</module>
+		<module>websocket.fileupload.web</module>
   </modules>
 
     <build>
