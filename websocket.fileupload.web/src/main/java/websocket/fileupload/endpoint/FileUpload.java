@@ -30,12 +30,10 @@ import websocket.fileupload.files.Operation;
 @ServerEndpoint(value = "/fileUpload", encoders = { JsonEncoder.class }, decoders = { JsonDecoder.class })
 public class FileUpload {
 
-	String operation;
-	Session session;
-	File tmp;
-	FileChannel channel;
-	long size;
-	long length = 0;
+	private Session session;
+	private FileChannel channel;
+	private long size;
+	private long length = 0;
 	private Path storage;
 
 	@OnOpen
@@ -46,18 +44,6 @@ public class FileUpload {
 		if (!dir.exists()) {
 			try {
 				Files.createDirectory(dir.toPath());
-			} catch (IOException e) {
-				try {
-					session.close(new CloseReason(CloseCodes.CANNOT_ACCEPT,
-							"cannot create local storage directory"));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		} else if (!dir.isDirectory()) {
-			try {
-				session.close(new CloseReason(CloseCodes.CANNOT_ACCEPT,
-						"cannot create local storage directory"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -70,8 +56,6 @@ public class FileUpload {
 	@OnMessage
 	public void processOperation(Operation operation) {
 		System.out.println(operation.toString());
-		this.operation = operation.getOperation();
-
 		switch (operation.getOperation()) {
 		case ("put"):
 			putFile(operation);
@@ -82,7 +66,6 @@ public class FileUpload {
 		default:
 			break;
 		}
-
 	}
 
 	private void listFiles() {
@@ -95,14 +78,13 @@ public class FileUpload {
 					storageFiles.addFile(abs.getFileName().toString(),
 							Files.size(abs));
 			}
-		} catch (DirectoryIteratorException | IOException ex) {
-			// TODO send exception message
-			ex.printStackTrace();
+		} catch (DirectoryIteratorException | IOException e) {
+			e.printStackTrace();
+			return;
 		}
 		try {
 			session.getBasicRemote().sendObject(storageFiles);
 		} catch (IOException | EncodeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -111,6 +93,7 @@ public class FileUpload {
 		try {
 			Path tmp = Paths.get(storage.normalize().toString(),
 					operation.getFileName());
+			
 			channel = FileChannel.open(tmp, EnumSet.of(
 					StandardOpenOption.TRUNCATE_EXISTING,
 					StandardOpenOption.WRITE, StandardOpenOption.CREATE));
@@ -119,7 +102,6 @@ public class FileUpload {
 		} catch (IllegalArgumentException | IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@OnMessage
@@ -134,14 +116,12 @@ public class FileUpload {
 				this.length += res;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (length == size) {
 			try {
 				channel.close();
-					} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			channel = null;
